@@ -1,0 +1,32 @@
+<%= form_with(model: admin_plan, local: true) do |form| %>
+  <% if admin_plan.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(admin_plan.errors.count, "error") %> prohibited this admin_plan from being saved:</h2>
+
+      <ul>
+        <% admin_plan.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :admin_plan_name %>
+    <%= form.text_field :admin_plan_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :admin_plan_price %>
+    <%= form.text_field :admin_plan_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :admin_plan_description %>
+    <%= form.text_area :admin_plan_description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

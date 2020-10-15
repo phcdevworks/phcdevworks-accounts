@@ -1,0 +1,7 @@
+:backtrace: false
+:bulk_threshold: 1000
+:sources:
+- https://rubygems.org/
+- https://bradpotts:398f187f354e7bfbc4792d77fb2181096b5ebc02@rubygems.pkg.github.com/phcdevworks/
+:update_sources: true
+:verbose: true

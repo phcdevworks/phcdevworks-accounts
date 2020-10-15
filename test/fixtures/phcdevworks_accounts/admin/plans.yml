@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  admin_plan_name: MyString
+  admin_plan_price: 9.99
+  admin_plan_description: MyText
+
+two:
+  admin_plan_name: MyString
+  admin_plan_price: 9.99
+  admin_plan_description: MyText

@@ -1,36 +1,42 @@
 module PhcdevworksAccounts
-  class User < ApplicationRecord
+    class User < ApplicationRecord
 
-    # Autogenerate Organization ID
-    before_create :phcdevworks_generate_org_id
+        # Add Subscriptions
+        include Pay::Billable
 
-    # User Gravatar Support
-    include Gravtastic
-    gravtastic
+        # Autogenerate Organization ID
+        before_create :phcdevworks_generate_org_id
 
-    # Add Users Roles
-    enum role: [:user, :editor, :admin]
-    after_initialize :phcdevworks_set_default_role
+        # User Gravatar Support
+        include Gravtastic
+        gravtastic
 
-    # Include default devise modules. Others available are:
-    # :trackable, :confirmable, :lockable and :omniauthable
-    devise :database_authenticatable, :registerable, :recoverable, :rememberable,  :validatable, :timeoutable
+        # Add Users Roles
+        enum role: [:user, :editor, :admin]
+        after_initialize :phcdevworks_set_default_role
 
-    private
+        # Include default devise modules. Others available are:
+        # :trackable, :confirmable, :lockable and :omniauthable
+        devise :database_authenticatable, :registerable, :recoverable, :rememberable,  :validatable, :timeoutable
 
-    # Autogenerate User Organization ID
-    def phcdevworks_generate_org_id
-      self.org_id = SecureRandom.hex(5)
+        # Relationships
+        has_many :subscriptions, class_name: "PhcdevworksAccounts::Subscription"
+
+        private
+
+        # Autogenerate User Organization ID
+        def phcdevworks_generate_org_id
+            self.org_id = SecureRandom.hex(5)
+        end
+
+        # First Signup Admin and Rest Default to User
+        def phcdevworks_set_default_role
+            if User.all.count < 1
+                self.role ||= :admin
+            elsif
+                self.role ||= :user
+            end
+        end
+
     end
-
-    # First Signup Admin and Rest Default to User
-    def phcdevworks_set_default_role
-      if User.all.count < 1
-        self.role ||= :admin
-      elsif
-        self.role ||= :user
-      end
-    end
-
-  end
 end

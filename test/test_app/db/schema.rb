@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_12_062724) do
+ActiveRecord::Schema.define(version: 2020_10_12_232765) do
 
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -52,12 +52,54 @@ ActiveRecord::Schema.define(version: 2019_10_12_062724) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "pay_charges", force: :cascade do |t|
+    t.string "owner_type"
+    t.integer "owner_id"
+    t.string "processor", null: false
+    t.string "processor_id", null: false
+    t.integer "amount", null: false
+    t.integer "amount_refunded"
+    t.string "card_type"
+    t.string "card_last4"
+    t.string "card_exp_month"
+    t.string "card_exp_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pay_subscriptions", force: :cascade do |t|
+    t.string "owner_type"
+    t.integer "owner_id"
+    t.string "name", null: false
+    t.string "processor", null: false
+    t.string "processor_id", null: false
+    t.string "processor_plan", null: false
+    t.integer "quantity", default: 1, null: false
+    t.datetime "trial_ends_at"
+    t.datetime "ends_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string "status"
+  end
+
   create_table "phcdevworks_accounts_users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "firstname"
@@ -66,11 +108,21 @@ ActiveRecord::Schema.define(version: 2019_10_12_062724) do
     t.string "org_id"
     t.integer "role"
     t.boolean "terms_of_service"
+    t.string "processor"
+    t.string "processor_id"
+    t.string "card_type"
+    t.string "card_last4"
+    t.string "card_exp_month"
+    t.string "card_exp_year"
+    t.datetime "trial_ends_at"
+    t.text "extra_billing_info"
+    t.index ["confirmation_token"], name: "index_phcdevworks_accounts_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_phcdevworks_accounts_users_on_email", unique: true
     t.index ["firstname"], name: "index_phcdevworks_accounts_users_on_firstname"
     t.index ["lastname"], name: "index_phcdevworks_accounts_users_on_lastname"
     t.index ["org_id"], name: "index_phcdevworks_accounts_users_on_org_id", unique: true
     t.index ["reset_password_token"], name: "index_phcdevworks_accounts_users_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_phcdevworks_accounts_users_on_unlock_token", unique: true
     t.index ["username"], name: "index_phcdevworks_accounts_users_on_username", unique: true
   end
 

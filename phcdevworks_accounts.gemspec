@@ -53,7 +53,15 @@ Gem::Specification.new do |spec|
   spec.add_dependency "simple_token_authentication", "~> 1.17"
 
   # Payments Dependencies
-  spec.add_dependency "activemerchant", "~> 1.114"
+  spec.add_dependency "pay", "~> 2.2", ">= 2.2.1"
+  spec.add_dependency "receipts", "~> 1.0", ">= 1.0.4"
+
+  # Stripe Dependencies
+  spec.add_dependency "stripe", "~> 5.26"
+  spec.add_dependency "stripe_event", "~> 2.3", ">= 2.3.1"
+
+  # Braintree Dependencies
+  spec.add_dependency "braintree", "~> 2.104", ">= 2.104.1"
 
   # Development Dependencies
   spec.add_development_dependency "sqlite3", "~> 1.4"

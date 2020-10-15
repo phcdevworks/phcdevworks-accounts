@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Admin Plans</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Admin plan name</th>
+      <th>Admin plan price</th>
+      <th>Admin plan description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_plans.each do |admin_plan| %>
+      <tr>
+        <td><%= admin_plan.admin_plan_name %></td>
+        <td><%= admin_plan.admin_plan_price %></td>
+        <td><%= admin_plan.admin_plan_description %></td>
+        <td><%= link_to 'Show', admin_plan %></td>
+        <td><%= link_to 'Edit', edit_admin_plan_path(admin_plan) %></td>
+        <td><%= link_to 'Destroy', admin_plan, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Admin Plan', new_admin_plan_path %>

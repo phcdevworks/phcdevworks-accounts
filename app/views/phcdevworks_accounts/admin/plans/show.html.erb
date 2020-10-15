@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Admin plan name:</strong>
+  <%= @admin_plan.admin_plan_name %>
+</p>
+
+<p>
+  <strong>Admin plan price:</strong>
+  <%= @admin_plan.admin_plan_price %>
+</p>
+
+<p>
+  <strong>Admin plan description:</strong>
+  <%= @admin_plan.admin_plan_description %>
+</p>
+
+<%= link_to 'Edit', edit_admin_plan_path(@admin_plan) %> |
+<%= link_to 'Back', admin_plans_path %>

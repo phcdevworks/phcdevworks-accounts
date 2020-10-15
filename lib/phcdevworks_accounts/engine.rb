@@ -31,7 +31,10 @@ module PhcdevworksAccounts
     require "simple_token_authentication"
 
     # Payment Dependencies
-    require "activemerchant"
+    require "pay"
+    require "stripe"
+    require "stripe_event"
+    require "receipts"
 
     # Plugin Namespace
     isolate_namespace PhcdevworksAccounts
