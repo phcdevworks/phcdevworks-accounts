@@ -1,8 +1,5 @@
 PhcdevworksAccounts::Engine.routes.draw do
 
-  namespace :admin do
-    resources :plans
-  end
     # User Routes
     devise_for :users, {
         class_name: "PhcdevworksAccounts::User",
