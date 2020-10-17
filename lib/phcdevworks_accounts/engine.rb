@@ -32,9 +32,12 @@ module PhcdevworksAccounts
 
     # Payment Dependencies
     require "pay"
+    require "receipts"
+    require "money-rails"
+
+    # Stripe
     require "stripe"
     require "stripe_event"
-    require "receipts"
 
     # Plugin Namespace
     isolate_namespace PhcdevworksAccounts

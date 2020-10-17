@@ -52,9 +52,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency "devise", "~> 4.7"
   spec.add_dependency "simple_token_authentication", "~> 1.17"
 
-  # Payments Dependencies
-  spec.add_dependency "pay", "~> 2.2", ">= 2.2.1"
-  spec.add_dependency "receipts", "~> 1.0", ">= 1.0.4"
+  # Financial Dependencies
+  spec.add_dependency "pay", "~> 2.2"
+  spec.add_dependency "receipts", "~> 1.0"
+  spec.add_dependency "money-rails", "~> 1.13"
 
   # Stripe Dependencies
   spec.add_dependency "stripe", "~> 5.26"
