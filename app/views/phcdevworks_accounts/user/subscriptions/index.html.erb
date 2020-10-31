@@ -37,7 +37,7 @@
                     <% @subscription_plans_list.each do |stripe_plans_list| %>
                     	<%= link_to phcdevworks_accounts.new_user_subscription_path(:plan_id => stripe_plans_list.id) do %>
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1"><%= number_to_currency(stripe_plans_list.phc_stripe_to_cents) %></h5>
+                                <h5 class="mb-1"><%= stripe_plans_list.unit_amount %></h5>
                             </div>
                        
                         <% end %>

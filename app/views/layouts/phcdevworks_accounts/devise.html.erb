@@ -25,11 +25,11 @@
     <!-- CSS Styles -->
     
     <!-- Font -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700"/>
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700", media: "all" %>
     <!-- Font -->
 
     <!-- Stripe Payments -->
-    <script src="https://js.stripe.com/v3/"></script>
+    <%= javascript_include_tag "https://js.stripe.com/v3/", "data-turbolinks-track": "reload" %>
     <%= tag.meta name: "stripe-key", content: Pay::Stripe.public_key %>
     <!-- Stripe Payments -->
 
