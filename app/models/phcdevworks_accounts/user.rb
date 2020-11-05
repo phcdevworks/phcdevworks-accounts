@@ -21,7 +21,9 @@ module PhcdevworksAccounts
 
         # Relationships
         has_many :subscriptions, class_name: "PhcdevworksAccounts::Subscription"
-
+belongs_to :plan
+has_one :subscription, through: :plan
+  
         private
 
         # Autogenerate User Organization ID
@@ -36,6 +38,10 @@ module PhcdevworksAccounts
             elsif
                 self.role ||= :user
             end
+        end
+
+        def phcdevworks_set_name
+            self.name = [first_name, last_name].join(" ").strip
         end
 
     end

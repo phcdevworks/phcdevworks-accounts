@@ -25,10 +25,6 @@
     <%= tag.meta name: "stripe-key", content: Pay::Stripe.public_key %>
     <!-- Stripe Payments -->
 
-    <!-- JavaScript -->
-    <%= javascript_include_tag "phcdevworks_accounts/application", "data-turbolinks-track": "reload" %>
-    <!-- JavaScript -->
-
     <!-- CSS Styles -->
     <%= stylesheet_link_tag "phcdevworks_accounts/application", media: "all" %>
     <!-- CSS Styles -->
@@ -41,7 +37,7 @@
 <body>
 
     <!-- Page Container -->
-
+    <div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
 
         <!-- Page Header -->
         <div id="header" class="header navbar-default">
@@ -69,7 +65,12 @@
         </div>
         <!-- Footer Content -->
 
+    </div>
     <!-- Page Container -->
+
+    <!-- JavaScript -->
+    <%= javascript_include_tag "phcdevworks_accounts/application", "data-turbolinks-track": "reload" %>
+    <!-- JavaScript -->
 
 </body>
 </html>

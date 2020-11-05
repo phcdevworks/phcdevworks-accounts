@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_12_232765) do
+ActiveRecord::Schema.define(version: 2020_10_31_141459) do
 
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -52,21 +52,6 @@ ActiveRecord::Schema.define(version: 2020_10_12_232765) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "pay_charges", force: :cascade do |t|
-    t.string "owner_type"
-    t.integer "owner_id"
-    t.string "processor", null: false
-    t.string "processor_id", null: false
-    t.integer "amount", null: false
-    t.integer "amount_refunded"
-    t.string "card_type"
-    t.string "card_last4"
-    t.string "card_exp_month"
-    t.string "card_exp_year"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "pay_subscriptions", force: :cascade do |t|
     t.string "owner_type"
     t.integer "owner_id"
@@ -80,6 +65,21 @@ ActiveRecord::Schema.define(version: 2020_10_12_232765) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "status"
+  end
+
+  create_table "phcdevworks_accounts_pay_charges", force: :cascade do |t|
+    t.string "owner_type"
+    t.integer "owner_id"
+    t.string "processor", null: false
+    t.string "processor_id", null: false
+    t.integer "amount", null: false
+    t.integer "amount_refunded"
+    t.string "card_type"
+    t.string "card_last4"
+    t.string "card_exp_month"
+    t.string "card_exp_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "phcdevworks_accounts_users", force: :cascade do |t|
@@ -110,11 +110,11 @@ ActiveRecord::Schema.define(version: 2020_10_12_232765) do
     t.boolean "terms_of_service"
     t.string "processor"
     t.string "processor_id"
+    t.datetime "trial_ends_at"
     t.string "card_type"
     t.string "card_last4"
     t.string "card_exp_month"
     t.string "card_exp_year"
-    t.datetime "trial_ends_at"
     t.text "extra_billing_info"
     t.index ["confirmation_token"], name: "index_phcdevworks_accounts_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_phcdevworks_accounts_users_on_email", unique: true

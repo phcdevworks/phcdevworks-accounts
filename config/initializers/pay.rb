@@ -1,7 +1,7 @@
 Pay.setup do |config|
 
     config.chargeable_class = "Pay::Charge"
-    config.chargeable_table = "pay_charges"
+    config.chargeable_table = "phcdevworks_accounts_pay_charges"
 
     config.business_name = ENV["PHC_Business_Name"]
     config.business_address = ENV["PHC_Business_Address"]

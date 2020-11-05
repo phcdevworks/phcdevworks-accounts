@@ -5,36 +5,36 @@ module PhcdevworksAccounts
 
         # Filters
         before_action :authenticate_user!
+        skip_before_action :check_access, only: :show
 
-        # User - List All Strip Products
-        def index
-            @subscription_plans_list = Stripe::Price.list({type: "recurring"})
+        # GET '/billing'
+        def show
+            @plans = Plan.active.all.select(:id, :name)
+            redirect_to subscribe_path unless current_user.subscribed_to_any?
         end
 
-        # User - New Subscriptions Page
+        # GET '/subscribe'
         def new
+            redirect_to billing_path if current_user.subscribed_to_any?
         end
 
-        # User - Create Subscription through Pay Gem
-        def create
-            current_user.processor = 'stripe'
-            current_user.assign_attributes(subscription_params)
-            current_user.subscribe(plan: params[:plan_id])
-            redirect_to root_path, notice: "Thanks for subscribing!"
-
-        rescue Pay::ActionRequired => e
-            redirect_to pay.payment_path(e.payment.id)
-
-        rescue Pay::Error => e
-            flash[:alert] = e.message
-            render :new
-
-        end
-
-        private
-
-        def subscription_params
-            params.permit(:card_token, :plan, :processor)
+        # PATCH /subscriptions
+        def update
+            current_user.processor = "stripe"
+            success = if params[:plan_id].present?
+            stripe_plan_id = Plan.find(params[:plan_id]).try(:stripe_id)
+            current_user.get_subscription.swap(stripe_plan_id)
+            current_user.update(plan_id: params[:plan_id])
+            elsif params[:payment_method_id].present?
+                current_user.update_card(params[:payment_method_id])
+            end
+            if success
+                redirect_to billing_path,
+                flash: { success: "Subscription updated!" }
+            else
+                redirect_to subscribe_path,
+                flash: { error: "There was an error updating your subscription :(" }
+            end
         end
 
     end
